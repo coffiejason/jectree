@@ -114,7 +114,7 @@ export function HeroTitle() {
           />
         </Input.Wrapper>
 
-        <Button leftIcon={<IconUsers size={14} />} variant="gradient" sx={{marginBottom:20}} gradient={{ from: 'indigo', to: 'cyan' }}>Join waitlist</Button>
+        <Button leftIcon={<IconUsers size={14} />} variant="gradient" sx={{marginBottom:20}} gradient={{ from: 'indigo', to: 'cyan' }} disabled>Join waitlist</Button>
       </Modal>
 
       <div className={classes.wrapper} >
@@ -137,6 +137,7 @@ export function HeroTitle() {
               variant="gradient"
               gradient={{ from: 'blue', to: 'cyan' }}
               onClick={() => setOpened(true)}
+
             >
               Join the waitlist
             </Button>

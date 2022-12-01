@@ -1,5 +1,6 @@
-import { ActionIcon, MantineProvider, Text, ColorSchemeProvider, ColorScheme, createStyles } from '@mantine/core';
-import { IconSun, IconMoonStars } from '@tabler/icons';
+import { MantineProvider, Text, ColorSchemeProvider, ColorScheme, createStyles } from '@mantine/core';
+import { createContext } from 'react';
+
 import { useState } from 'react';
 import { Brands, Header, HeroTitle } from './components';
 import './App.css';
@@ -13,35 +14,26 @@ const useStyles = createStyles((theme, _params, getRef) => ({
 
     [BREAKPOINT]: {
       marginLeft: '90%',
-  },
+    },
   }
 }));
 
 export default function App(this: any) {
-  const [colorScheme, setColorScheme] = useState<ColorScheme>('light');
+
+
+  const [colorScheme, setColorScheme] = useState<ColorScheme>('dark');
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
-  const dark = colorScheme === 'dark';
-  const { classes } = useStyles();
+
 
   return (
+
     <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-      <MantineProvider theme={{ colorScheme: colorScheme, }} withGlobalStyles withNormalizeCSS>
-        <Header links={[{ "link": "Home", "label": "Home" }, { "link": "Home", "label": "Myth Vs Fact" }, { "link": "Home", "label": "Contact Us" }]} />
-        {/* <ActionIcon
-            variant="outline"
-            color={dark ? 'yellow' : 'blue'}
-            onClick={() => toggleColorScheme()}
-            title="Toggle color scheme"
+    <MantineProvider theme={{ colorScheme: colorScheme, }} withGlobalStyles withNormalizeCSS>
+      <Header links={[{ "link": "Home", "label": "Home" }, { "link": "Home", "label": "Myth Vs Fact" }, { "link": "Home", "label": "Contact Us" }]} toggleColor={toggleColorScheme} colorScheme={colorScheme}/>
+      <HeroTitle />
+    </MantineProvider>
+  </ColorSchemeProvider>
 
-            className={classes.toggle}
-          >
-            {dark ? <IconSun size={18} /> : <IconMoonStars size={18} />}
-          </ActionIcon> */}
-        <HeroTitle />
-
-
-      </MantineProvider>
-    </ColorSchemeProvider>
   );
 }

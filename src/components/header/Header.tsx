@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { createStyles, AspectRatio, Header,Center, Container, Group, Burger, Paper, Transition,Title } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { ActionIcon, createStyles, AspectRatio, Header, Center, Container, Group, Burger, Paper, Transition, Title,useMantineTheme, ColorScheme  } from '@mantine/core';
+import { useDisclosure,useColorScheme } from '@mantine/hooks';
 import { MantineLogo } from '@mantine/ds';
 import logo from '../../assets/jectree_blue.svg';
+
+import { IconSun, IconMoonStars } from '@tabler/icons';
 
 const HEADER_HEIGHT = 60;
 
@@ -83,14 +85,18 @@ const useStyles = createStyles((theme) => ({
 
 interface HeaderResponsiveProps {
     links: { link: string; label: string }[],
+    toggleColor: any,
+    colorScheme: ColorScheme
 
 }
 
-export function HeaderResponsive({ links }: HeaderResponsiveProps) {
+export function HeaderResponsive({ links, toggleColor,colorScheme }: HeaderResponsiveProps) {
 
     const [opened, { toggle, close }] = useDisclosure(false);
     const [active, setActive] = useState(links[0].link);
     const { classes, cx } = useStyles();
+
+    const theme = useMantineTheme();
 
     const items = links.map((link) => (
         <a
@@ -112,18 +118,18 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
             <Container className={classes.header}>
                 <div className={classes.logo}>
                     <div>
-                        
-                        <Center inline>
-                        <img  src={logo} />
 
-                        <h1>
-                            Jectree
-                        </h1>
-                        
+                        <Center inline>
+                            <img src={logo} />
+
+                            <h1>
+                                Jectree
+                            </h1>
+
                         </Center>
-                        
+
                     </div>
-                    
+
 
                     {/* <MantineLogo size={28} /> */}
 
@@ -133,6 +139,15 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
                 <Group spacing={5} className={classes.links}>
                     {items}
                 </Group>
+
+                <ActionIcon
+                    variant="outline"
+                    color={colorScheme === 'dark' ? 'yellow' : 'blue'}
+                    onClick={colorScheme === 'dark' ? ()=> toggleColor('light') : ()=> toggleColor('dark')}
+                    title="Toggle color scheme"
+                >
+                    {colorScheme === 'dark' ? <IconSun size={18} /> : <IconMoonStars size={18} />}
+                </ActionIcon>
 
                 <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
 
