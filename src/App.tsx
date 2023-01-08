@@ -7,16 +7,16 @@ import './App.css';
 
 const BREAKPOINT = '@media (max-width: 755px)';
 
-const useStyles = createStyles((theme, _params, getRef) => ({
-  toggle: {
-    marginLeft: '95%',
-    marginTop: 10,
+// const useStyles = createStyles((theme, _params, getRef) => ({
+//   toggle: {
+//     marginLeft: '95%',
+//     marginTop: 10,
 
-    [BREAKPOINT]: {
-      marginLeft: '90%',
-    },
-  }
-}));
+//     [BREAKPOINT]: {
+//       marginLeft: '90%',
+//     },
+//   }
+// }));
 
 export default function App(this: any) {
 
